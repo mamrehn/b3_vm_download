@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Anleitung zur Installation der B3 virtuellen Maschine</title>
+  <style>
+    :root {
+      --bg: #f4f7f9;
+      --card-bg: #ffffff;
+      --primary: #007bff;
+      --primary-hover: #0069d9;
+      --secondary: #28a745;
+      --secondary-hover: #218838;
+      --guide: #6f42c1;
+      --guide-hover: #5a32a3;
+      --text-primary: #212529;
+      --text-muted: #6c757d;
+      --border-color: #e9ecef;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 0 10px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 2.5rem;
+      font-weight: 600;
+    }
+    h2 {
+      font-size: 1.75rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    h3 {
+      font-size: 1.5rem;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+    h4 {
+      font-size: 1.25rem;
+      margin-top: 25px;
+      margin-bottom: 10px;
+    }
+    header p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .card {
+      background-color: var(--card-bg);
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 24px;
+    }
+    .card p {
+      color: var(--text-muted);
+      margin-top: 0;
+    }
+    .btn, button.btn {
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+      font-weight: 500;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn:hover, button.btn:hover {
+      transform: translateY(-2px);
+    }
+    .btn-download { background-color: var(--primary); }
+    .btn-download:hover { background-color: var(--primary-hover); }
+    
+    .btn-random {
+      background-color: var(--secondary);
+      font-size: 1.2rem;
+      padding: 15px 30px;
+    }
+    .btn-random:hover { background-color: var(--secondary-hover); }
+
+    .btn-guide { background-color: var(--guide); }
+    .btn-guide:hover { background-color: var(--guide-hover); }
+
+    .button-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    details {
+      margin-top: 24px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--primary);
+    }
+    .mirror-list {
+      margin-top: 16px;
+      padding-left: 0;
+      list-style: none;
+    }
+    .mirror-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-radius: 6px;
+    }
+    .mirror-list li:nth-child(odd) {
+      background-color: #f8f9fa;
+    }
+    .password-info {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    footer {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: opacity 0.2s ease-in-out;
+    }
+    .modal-content {
+      background: white;
+      padding: 24px;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+    .password-display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 6px;
+      margin: 20px 0;
+    }
+    #modalPassword {
+      font-family: monospace;
+      font-size: 1.2rem;
+      font-weight: bold;
+      user-select: all;
+    }
+    .copy-feedback {
+      color: var(--secondary);
+      font-weight: bold;
+      height: 1em;
+    }
+    .guide-content img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 20px auto;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+    ol {
+      padding-left: 20px;
+    }
+    ol li {
+      margin-bottom: 10px;
+    }
+    .highlight {
+      background-color: #fff3cd; /* Light yellow for highlights */
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Anleitung zur Installation der B3 virtuellen Maschine</h1>
+      <p>Diese Anleitung führt Sie Schritt für Schritt durch die Einrichtung Ihrer virtuellen Maschine.</p>
+    </header>
+
+    <main class="guide-content">
+      <h3>Einrichtung Ihrer Virtuellen Maschine</h3>
+      <p>In diesem Kurs können Sie mit einer Virtuelle Maschine (VM) arbeiten, auf der
+        bereits alle notwendigen Programme installiert sind. Dies dient der
+        Vereinheitlichung der Lernumgebung, sowie der Vereinfachung von
+        Installationsprozessen.</p>
+      <p>Sie haben <strong>Administrationsrechte </strong>auf Ihrer Virtuellen
+        Maschine.<br>Für technische Unterstützung durch die Lehrkraft ist es
+        notwendig, dass Sie die einheitliche Umgebung als solche aufrechterhalten und
+        keine unerwarteten Änderungen durchführen.</p>
+      <h4>I) Einrichtung des Hypervisors</h4>
+      <ol>
+        <li>Download des Hypervisiors (VirtualBox in Version 7.2.2)<br><a
+            href="https://download.virtualbox.org/virtualbox/7.2.2/VirtualBox-7.2.2-170484-Win.exe"
+            target="_blank" rel="noopener">Windows hosts</a><br><a
+            href="https://download.virtualbox.org/virtualbox/7.2.2/VirtualBox-7.2.2-170484-OSX.dmg"
+            target="_blank" rel="noopener">macOS / Intel hosts</a><br><a
+            href="https://www.virtualbox.org/wiki/Linux_Downloads" target="_blank"
+            rel="noopener">Linux distributions</a></li>
+        <li>Lokale Installation der heruntergeladenen exe/dmg/deb/rpm Datei (je nach
+          ihrem Host-Betriebssystem)</li>
+        <li>Optional: Download des <a
+            href="https://download.virtualbox.org/virtualbox/7.2.2/Oracle_VirtualBox_Extension_Pack-7.2.2.vbox-extpack"
+            target="_blank" rel="noopener">Oracle VirtualBox Extension Pack</a> &amp;
+          Installation über Doppelklick</li>
+      </ol>
+      <p></p>
+      <p><strong>Hinweis</strong>: Es kann auch eine andere (neuere) Version von
+        VirtualBox installiert werden, bzw. eine vorhandene Version von VirtualBox
+        genutzt werden. Zu beachten ist dann jedoch, dass Sie auch die zur Version
+        passenden <a
+          href="https://www.virtualbox.org/manual/ch04.html#guestadd-install"
+          target="_blank" rel="noopener">Guest Additions</a> <em>im virtualisierten
+          Betriebssystem</em> nachinstallieren. Wenn Sie, wie oben beschrieben, die
+        empfohlene VirtualBox Version 7.2.2 verwenden, dann müssen Sie keine Guest
+        Additions nachinstallieren, da diese hierfür bereits vorinstalliert wurden.
+      </p>
+      <p></p>
+      <h4>II) Einrichtung des Gastsystems (die virtuelle Maschine)</h4>
+      <ol>
+        <li>Download der neuesten Version der B3 Virtuellen Maschine: <a
+            href="https://b3-f.de/vm" target="_blank" rel="noopener">b3-f.de/vm</a>
+        </li>
+        <li>Parallel, während des Downloads: Installieren Sie Virtualbox und das
+          VirtualBox Extension Pack </li>
+        <li>Doppelklick auf Ihre heruntergeladene ova Datei. Diese finden Sie in Ihrem
+          Downloads Verzeichnis<br>z.B.: <img class="img-fluid"
+            src="VM_install_00.png">
+        </li>
+        <li>VirtualBox öffnet sich. Folgen Sie den Anweisungen zum entpacken und
+          einrichten der VM.<br>Achten Sie auf ausreichend freien Festplattenplatz
+          (~35GB).<br><br><img class="img-fluid"
+            src="VM_install_01.png"><br><br><img class="img-fluid"
+            src="VM_install_02.png"><br><br><br></li>
+        <li>Starten Sie Ihre VM nach dem erfolgreichen Import über Virtualbox:<br><img
+            class="img-fluid"
+            src="VM_install_03.png"></li>
+        <li><span class="highlight">Username:
+            <strong>user</strong></span><br><span
+            class="highlight">Passwort: <strong>user</strong></span>
+        </li>
+        <li>Willkommen in ihrer persönlichen VM!</li>
+        <li>Sie können die heruntergeladene *.ova Datei aus Ihrem
+          Downloads-Verzeichnis nun löschen.<br>Die virtuelle Festplatte Ihrer VM
+          befindet sich nun unter "C:\Users\&lt;username&gt;\VirtualBox VMs" &lt;-
+          Diese Dateien bitte belassen!</li>
+      </ol>
+      <p></p>
+      <p></p>
+    </main>
+
+    <footer>
+      <p>B3 Fürth IT Team – VM-Bereitstellung</p>
+    </footer>
+  </div>
+</body>
+</html>

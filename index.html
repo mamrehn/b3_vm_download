@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Download & Installation der B3 virtuellen Maschine</title>
+  <style>
+    :root {
+      --bg: #f4f7f9;
+      --card-bg: #ffffff;
+      --primary: #007bff;
+      --primary-hover: #0069d9;
+      --secondary: #28a745;
+      --secondary-hover: #218838;
+      --guide: #6f42c1;
+      --guide-hover: #5a32a3;
+      --text-primary: #212529;
+      --text-muted: #6c757d;
+      --border-color: #e9ecef;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+    body {
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--text-primary);
+      line-height: 1.6;
+    }
+    .wrap {
+      max-width: 800px;
+      margin: 10px auto;
+      padding: 0 10px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 2.5rem;
+      font-weight: 600;
+    }
+    h2 {
+      font-size: 1.75rem;
+      margin-top: 0;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    header p {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .card {
+      background-color: var(--card-bg);
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      margin-bottom: 24px;
+    }
+    .card p {
+      color: var(--text-muted);
+      margin-top: 0;
+    }
+    .btn, button.btn {
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease-in-out, transform 0.1s ease;
+      font-weight: 500;
+      font-size: 1rem;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .btn:hover, button.btn:hover {
+      transform: translateY(-2px);
+    }
+    .btn-download { background-color: var(--primary); }
+    .btn-download:hover { background-color: var(--primary-hover); }
+    
+    .btn-random {
+      background-color: var(--secondary);
+      font-size: 1.2rem;
+      padding: 15px 30px;
+    }
+    .btn-random:hover { background-color: var(--secondary-hover); }
+
+    .btn-guide { background-color: var(--guide); }
+    .btn-guide:hover { background-color: var(--guide-hover); }
+
+    .button-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    details {
+      margin-top: 24px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--primary);
+    }
+    .mirror-list {
+      margin-top: 16px;
+      padding-left: 0;
+      list-style: none;
+    }
+    .mirror-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      border-radius: 6px;
+    }
+    .mirror-list li:nth-child(odd) {
+      background-color: #f8f9fa;
+    }
+    .password-info {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    footer {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: opacity 0.2s ease-in-out;
+    }
+    .modal-content {
+      background: white;
+      padding: 24px;
+      border-radius: 8px;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      text-align: center;
+    }
+    .password-display {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 6px;
+      margin: 20px 0;
+    }
+    #modalPassword {
+      font-family: monospace;
+      font-size: 1.2rem;
+      font-weight: bold;
+      user-select: all;
+    }
+    .copy-feedback {
+      color: var(--secondary);
+      font-weight: bold;
+      height: 1em;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Download der B3 VM</h1>
+      <p>Folge diesen zwei Schritten, um die virtuelle Maschine auf deinem Computer einzurichten.</p>
+    </header>
+
+    <main>
+      <section class="card">
+        <h2>Schritt 1: Dateien herunterladen</h2>
+        <p>Klicke auf den Knopf, um den Download zu starten (Dateien: *.ova, *.exe und *.vbox-extpack auswählen). <br/>
+          Es wird automatisch ein verfügbarer Server für dich ausgewählt, um die gesamten Downloads zu verteilen.</p>
+        <button id="randomDownloadBtn" class="btn btn-random">🚀 Download starten</button>
+        
+        <details>
+          <summary>Alternative Download-Quellen anzeigen</summary>
+          <ul class="mirror-list">
+            <li>
+              <span>Google Drive</span>
+              <a class="btn btn-download" href="https://drive.google.com/drive/folders/1-TH71SxDIxYd-00ag7kXZHazI6rvO-c2?usp=sharing" target="_blank" rel="noopener noreferrer">Download</a>
+            </li>
+            <li>
+              <span>Microsoft OneDrive</span>
+              <a class="btn btn-download" href="https://b3fuerth-my.sharepoint.com/:f:/g/personal/amrehn_mario_6072-fuerth_de/ErlN7BloJsxNsx4JhTjDabcB3uY8Sl69vD0AEfLI3xDnUg?e=VZSAyy" target="_blank" rel="noopener noreferrer">Download</a>
+            </li>
+            <li>
+              <div>
+                <span>ByCS Drive</span>
+                <div class="password-info">Passwort: <strong>Ab!1234567</strong></div>
+              </div>
+              <a class="btn btn-download" href="https://6072.drive.bycs.de/s/ooeuoYSTTEVAkjI" target="_blank" rel="noopener noreferrer">Download</a>
+            </li>
+          </ul>
+        </details>
+      </section>
+
+      <section class="card">
+        <h2>Schritt 2: VM installieren</h2>
+        <p>Du benötigst du eine Anleitung zur Installation. Die Anleitung hier und im Mebis Kurs sind identisch.</p>
+        <div class="button-group">
+          <a class="btn btn-guide" href="vm-installationsanleitung.html" target="_blank" rel="noopener noreferrer">📖 Anleitung als Webseite</a>
+          <a class="btn btn-guide" href="https://lernplattform.mebis.bycs.de/course/view.php?id=1681687&section=3#tabs-tree-start" target="_blank" rel="noopener noreferrer">🔗 Mebis für IF11*</a>
+          <a class="btn btn-guide" href="https://lernplattform.mebis.bycs.de/mod/book/view.php?id=71531581&chapterid=1663402#mod_book-chapter" target="_blank" rel="noopener noreferrer">🔗 Mebis für IFA12*</a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>B3 Fürth IT Team – VM-Bereitstellung</p>
+    </footer>
+  </div>
+
+  <div id="passwordModal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <h3>Wichtiger Hinweis</h3>
+      <p>Dein Download startet von <strong></strong>. Dieser Server benötigt ein Passwort.</p>
+      <div class="password-display">
+        <span id="modalPassword"></span>
+        <button id="copyPasswordBtn" class="btn btn-download">Kopieren</button>
+      </div>
+      <p class="copy-feedback" style="visibility: hidden;">Passwort kopiert!</p>
+      <div class="button-group">
+        <button id="proceedDownloadBtn" class="btn btn-random">Zum Download</button>
+        <button id="cancelModalBtn" class="btn btn-guide">Abbrechen</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const downloadLinks = document.querySelectorAll(".mirror-list li a.btn-download");
+      const mirrors = Array.from(downloadLinks).map(link => {
+        const listItem = link.closest('li');
+        const name = listItem.querySelector('span').textContent.trim();
+        const passwordElement = listItem.querySelector('.password-info strong');
+        const password = passwordElement ? passwordElement.textContent.trim() : null;
+        return { name, url: link.href, password };
+      });
+
+      const modal = document.getElementById('passwordModal');
+      const modalServerName = modal.querySelector('strong');
+      const modalPasswordSpan = document.getElementById('modalPassword');
+      const copyBtn = document.getElementById('copyPasswordBtn');
+      const copyFeedback = modal.querySelector('.copy-feedback');
+      const proceedBtn = document.getElementById('proceedDownloadBtn');
+      const cancelBtn = document.getElementById('cancelModalBtn');
+
+      let downloadUrl = '';
+
+      document.getElementById("randomDownloadBtn").addEventListener("click", function(e) {
+        e.preventDefault();
+        if (mirrors.length === 0) return;
+        const mirror = mirrors[Math.floor(Math.random() * mirrors.length)];
+
+        if (mirror.password) {
+          downloadUrl = mirror.url;
+          modalServerName.textContent = mirror.name;
+          modalPasswordSpan.textContent = mirror.password;
+          modal.style.display = 'flex';
+        } else {
+          window.open(mirror.url, "_blank");
+        }
+      });
+
+      proceedBtn.addEventListener('click', () => {
+        if (downloadUrl) {
+          window.open(downloadUrl, "_blank");
+        }
+        hideModal();
+      });
+
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(modalPasswordSpan.textContent).then(() => {
+          copyFeedback.style.visibility = 'visible';
+          setTimeout(() => { copyFeedback.style.visibility = 'hidden'; }, 2000);
+        });
+      });
+
+      function hideModal() {
+        modal.style.display = 'none';
+        downloadUrl = '';
+      }
+
+      cancelBtn.addEventListener('click', hideModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          hideModal();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
