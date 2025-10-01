@@ -32,7 +32,7 @@
     }
     header {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
     h1 {
       margin: 0 0 8px 0;
@@ -44,7 +44,7 @@
       margin-top: 0;
       border-bottom: 1px solid var(--border-color);
       padding-bottom: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
     header p {
       font-size: 1rem;
@@ -54,10 +54,10 @@
     }
     .card {
       background-color: var(--card-bg);
-      padding: 24px;
+      padding: 20px;
       border-radius: 8px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
     .card p {
       color: var(--text-muted);
@@ -67,7 +67,7 @@
       display: inline-block;
       color: white;
       text-decoration: none;
-      padding: 12px 24px;
+      padding: 12px 20px;
       border-radius: 6px;
       transition: background-color 0.2s ease-in-out, transform 0.1s ease;
       font-weight: 500;
@@ -100,7 +100,7 @@
     }
 
     details {
-      margin-top: 24px;
+      margin-top: 20px;
       border-top: 1px solid var(--border-color);
       padding-top: 16px;
     }
@@ -149,7 +149,7 @@
     }
     .modal-content {
       background: white;
-      padding: 24px;
+      padding: 20px;
       border-radius: 8px;
       max-width: 500px;
       width: 90%;
@@ -182,15 +182,15 @@
 <body>
   <div class="wrap">
     <header>
-      <h1>Download der B3 VM</h1>
-      <p>Folge diesen zwei Schritten, um die virtuelle Maschine auf deinem Computer einzurichten.</p>
+      <h1>Download der B3 virtuellen Maschine</h1>
+      <p>Folgen Sie diesen beiden Schritten, um die virtuelle Maschine auf Ihrem Computer einzurichten.</p>
     </header>
 
     <main>
       <section class="card">
         <h2>Schritt 1: Dateien herunterladen</h2>
-        <p>Klicke auf den Knopf, um den Download zu starten (Dateien: *.ova, *.exe und *.vbox-extpack auswählen). <br/>
-          Es wird automatisch ein verfügbarer Server für dich ausgewählt, um die gesamten Downloads zu verteilen.</p>
+        <p>Klicken Sie auf die Knopf, um den Download zu starten (Dateien: *.ova, *.exe und *.vbox-extpack auswählen). <br/>
+          Es wird automatisch ein verfügbarer Server für Sie ausgewählt, um die gesamten Downloads zu verteilen.</p>
         <button id="randomDownloadBtn" class="btn btn-random">🚀 Download starten</button>
         
         <details>
@@ -217,7 +217,7 @@
 
       <section class="card">
         <h2>Schritt 2: VM installieren</h2>
-        <p>Du benötigst eine Anleitung zur Installation. Die Anleitung hier und im Mebis Kurs sind identisch.</p>
+        <p>Sie benötigen eine Anleitung zur Installation. Die Anleitung hier und im Mebis-Kurs sind identisch.</p>
         <div class="button-group">
           <a class="btn btn-guide" href="vm-installationsanleitung.html" target="_blank" rel="noopener noreferrer">📖 Anleitung als Webseite</a>
           <a class="btn btn-guide" href="https://lernplattform.mebis.bycs.de/course/view.php?id=1681687&section=3#tabs-tree-start" target="_blank" rel="noopener noreferrer">🔗 Mebis für IF11*</a>
@@ -234,7 +234,7 @@
   <div id="passwordModal" class="modal-overlay" style="display: none;">
     <div class="modal-content">
       <h3>Wichtiger Hinweis</h3>
-      <p>Dein Download startet von <strong></strong>. Dieser Server benötigt ein Passwort.</p>
+      <p>Ihr Download startet von <strong></strong>. Dieser Server benötigt ein Passwort.</p>
       <div class="password-display">
         <span id="modalPassword"></span>
         <button id="copyPasswordBtn" class="btn btn-download">Kopieren</button>
