@@ -1,0 +1,24 @@
+/* App CSS for the B3 VM download page. Tokens only (style guide § 1, rule 2). */
+
+/* Download sources: one row per source, name left, button right. */
+.mirror-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.mirror-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Long paths in the steps break instead of widening the page on phones. */
+.action-steps code {
+  overflow-wrap: anywhere;
+}
